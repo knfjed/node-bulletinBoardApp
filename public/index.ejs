@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>Bulletin Board App</title>
+    <script>
+      function init() {
+        var id = localStorage.getItem("id");
+        if (id == null) {
+          location.href = "./login";
+        }
+        document.querySelector("#id").textContent = "ID:" + id;
+        document.querySelector("#id_input").value = id;
+      }
+    </script>
+  </head>
+  <body onload="init();">
+    <head>
+      <h1>Bulletin Board</h1>
+    </head>
+
+    <div role="main">
+      <p>*メッセージは最大10件まで表示できます</p>
+      <form method="POST" action="/">
+      <p>
+        <span id="id"></span>
+        <input type="hidden" id="id_input" name="id" value="">
+      </p>
+    <p>
+      <input type="text" name="msg">
+      <input type="submit" value="送信">
+    </p>
+    </form>
+
+    <hr>
+    <p><table style="width:85%">
+    <% for(var i in data) { %>
+      <%- include("data_item", {val: data[i]}) %>
+    <% } %>
+  </table></p>
+    </div>
+  </body>
+</html>
